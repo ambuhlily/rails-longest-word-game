@@ -1,6 +1,38 @@
-<h1>Score Page</h1>
+<h1>Results!</h1>
 
 <% word = params[:new].split("") %>
-<p> <%= word %> </p>
-<p> <%= @letters %> </p>
-<%= link_to "New Game", new_path %>
+<% nomatch = [] %>
+
+
+<p> Your Word: <%= params[:new] %> </p>
+<p> Your Grid: <%= $letters %> </p>
+
+<% word.each do |letter| %>
+<% if $letters.include?(letter) %>
+<% $letters.delete(letter) %>
+<% elsif  %>
+<% nomatch << letter %>
+<% end %>
+<% end %>
+
+<% if nomatch.length == 0 %>
+<% success1 = true %>
+<% else %>
+<% success1 = false %>
+<% end %>
+
+<% if success1 == true && @result == true %>
+<p> Congratulations! </p>
+<% elsif %>
+<% success1 == true && @result == false %>
+<p> This is not a valid English word! </p>
+<% elsif %>
+<% success1 == false && @result == true %>
+<p> That word is not in your grid! </p>
+<% else %>
+<p> Sorry, try again! </p>
+<% end %>
+
+<div class="button">
+ <%= link_to "New Game", new_path %>
+</div>
